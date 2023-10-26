@@ -1,0 +1,36 @@
+<form id="dataForm" #full (submit)="enviar(full,$event);">
+    <h1>Nueva Imagen</h1>
+    <div class="text-center ">
+        <div (click)="inputImg.click()" class="card mx-auto" style="width: 12rem;">
+            <img [src]="archivoImg[0]" class="card-img-top rounded d-block" alt="120px" id="imgProduc">
+            
+        </div>
+    </div>
+    <input #inputImg (change)="capturaImg($event)" class="form-control" type="file" name="file" required hidden>
+    <div class="form-floating mx-auto d-block m-2">
+        <input class="form-control" type="text" name="name" placeholder="Producto" required >
+        <label for="formGroupExampleInput">Referencia Imagen:</label>
+    </div>
+
+    <mat-chip-listbox #listchips aria-label="Fish selection" multiple >
+        <mat-chip-option #chip *ngFor="let i of typeList" value="{{i.cod}}">
+            {{i.nameClass}}
+        </mat-chip-option>
+        <!--<mat-chip-option>Anime</mat-chip-option>
+        <mat-chip-option>VideoJuegos</mat-chip-option>
+        <mat-chip-option color="accent" selected >Accent fish</mat-chip-option>
+        <mat-chip-option color="warn" >Warn fish</mat-chip-option>
+        {{listchips.value |json}}-->
+    </mat-chip-listbox>
+
+    <button class="form-control btn btn-success" type="submit" id="btnForm" >enviar</button>-->
+</form>
+
+<!--<div class="gallery-container">
+    <div class="gallery">
+        <div class="gallery-img" *ngFor="let data of galleryImg">
+            <img [src]="data.url" [alt]="data.cod">
+        </div>
+    </div>
+
+</div>-->

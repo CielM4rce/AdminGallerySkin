@@ -1,0 +1,9 @@
+
+<div style="overflow:scroll; height:100vh;">
+    <div class="gallery">
+        <div class="gallery-img" *ngFor="let data of _services.ListImg | paginate: { itemsPerPage: 10, currentPage: p }">
+            <img [src]="data.url" [alt]="data.cod">
+        </div>
+    </div>
+</div>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
