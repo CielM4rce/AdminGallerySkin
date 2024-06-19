@@ -1,4 +1,66 @@
-<form id="dataForm" #full (submit)="enviar(full,$event);">
+<button (click)="addItem()" *ngIf="!openForm">Nuevo</button>
+<button (click)="closeItem()" type="button" class="btn-close" *ngIf="openForm"></button>
+<div *ngIf="openForm">
+    <form [formGroup]="formImg" (submit)="onSubmit()" >
+
+        <div class="form-floating mx-auto d-block m-2">
+            <input  class="form-control" type="text" formControlName="titulo" name="name" placeholder="Producto" required >
+            <label for="formGroupExampleInput">Titulo:</label>
+        </div>
+        <h1>Nueva Item : {{this._services.ultCod}}</h1>
+        <div class="row text-center">
+            <div class="text-center col-md-6">
+                <div class="card mx-auto"[hidden]="!url1.valid" >
+                    <button  type="button" class="btn-close" *ngIf="openForm"></button>
+                    <img [src]="formImg.value['listUrl'][0]" class="card-img-top rounded d-block" alt="120px" id="imgProduc">
+                </div>
+            </div>
+    
+            <div class="text-center col-md-6" >
+                <div class="card mx-auto"  [hidden]="!url2.valid" >
+                    <button  type="button" class="btn-close" *ngIf="openForm"></button>
+                    <img [src]="formImg.value['listUrl'][1]" class="card-img-top rounded d-block" alt="120px" id="imgProduc">
+                </div>
+            </div>
+        </div>
+        
+    
+        <div formArrayName="listUrl">
+            <div class="form-floating mx-auto d-block m-2">
+                <input  class="form-control" type="url" formControlName=0 name="name" placeholder="Producto" required >
+                <label for="formGroupExampleInput">URL 1:</label>
+            </div>
+        
+            <div class="form-floating mx-auto d-block m-2">
+                <input  class="form-control" type="url"  formControlName=1 name="name" placeholder="Producto" required >
+                <label for="formGroupExampleInput">URL 2:</label>
+            </div>
+        </div>
+    
+        <div class="form-floating mx-auto d-block m-2">
+            <input  class="form-control" type="textArea"  formControlName="descripcion" name="name" placeholder="Producto" required >
+            <label for="formGroupExampleInput">descripcion:</label>
+        </div>
+        
+        <mat-chip-listbox #listchips aria-label="Fish selection" multiple formControlName="clase">
+            <mat-chip-option #chip *ngFor="let i of typeList" value="{{i}}">
+                {{i}}
+            </mat-chip-option>
+        </mat-chip-listbox>
+    
+        <div class="form-floating mx-auto d-block m-2">
+            <input  class="form-control" type="number"  formControlName="precio" name="name" placeholder="Producto" required >
+            <label for="formGroupExampleInput">S/.</label>
+        </div>
+    
+        <button class="form-control btn btn-success" type="submit" id="btnForm" >enviar</button>
+    </form>
+</div>
+
+
+{{formImg.value | json}}
+
+<!--<form id="dataForm" #full (submit)="enviar(full,$event);">
     <h1>Nueva Imagen</h1>
     <div class="text-center ">
         <div (click)="inputImg.click()" class="card mx-auto" style="width: 12rem;">
@@ -12,19 +74,30 @@
         <label for="formGroupExampleInput">Referencia Imagen:</label>
     </div>
 
-    <mat-chip-listbox #listchips aria-label="Fish selection" multiple >
+    <div class="form-floating mx-auto d-block m-2">
+        <input class="form-control" type="text" name="name" placeholder="URL" required >
+        <label for="formGroupExampleInput">Url de imgen</label>
+    </div>
+
+    <div class="form-floating mx-auto d-block m-2">
+        <input class="form-control" type="text" name="name" placeholder="URL" required >
+        <label for="formGroupExampleInput">Url de imgen</label>
+    </div>-->
+
+   <!-- <mat-chip-listbox #listchips aria-label="Fish selection" multiple >
         <mat-chip-option #chip *ngFor="let i of typeList" value="{{i.cod}}">
             {{i.nameClass}}
-        </mat-chip-option>
+        </mat-chip-option>-->
         <!--<mat-chip-option>Anime</mat-chip-option>
         <mat-chip-option>VideoJuegos</mat-chip-option>
         <mat-chip-option color="accent" selected >Accent fish</mat-chip-option>
         <mat-chip-option color="warn" >Warn fish</mat-chip-option>
         {{listchips.value |json}}-->
-    </mat-chip-listbox>
+    <!--</mat-chip-listbox>
 
-    <button class="form-control btn btn-success" type="submit" id="btnForm" >enviar</button>-->
-</form>
+   
+    <button class="form-control btn btn-success" type="submit" id="btnForm" >enviar</button>
+</form>-->
 
 <!--<div class="gallery-container">
     <div class="gallery">

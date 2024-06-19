@@ -1,0 +1,22 @@
+<nav class="navbar bg-primary navbar-expand-lg bg-body-tertiary sticky-top" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="">Skin Gallery</a>
+     
+      <form class="container-fluid">
+        <div class="input-group">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [formControl]="busqueda">
+            </div>
+          </form>
+          <button class="btn btn-outline-success" (click)="_services.buscar(busqueda.value)">Buscar</button>
+        
+    </div>
+  </nav>
+<div class="container fondo">
+    <mat-chip-listbox #listchips aria-label="Fish selection" [formControl]="clase" >
+        <mat-chip-option #chip *ngFor="let i of typeList" value="{{i}}" (selectionChange)="_services.filtrar(i)" >
+            {{i}}
+        </mat-chip-option>
+    </mat-chip-listbox>
+    <app-list-items buscarData="{{busqueda}}"></app-list-items>
+
+</div>

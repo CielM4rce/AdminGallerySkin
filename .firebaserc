@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "galleryskin-2bf84": {
+      "hosting": {
+        "galeriaImage": [
+          "galleryskin-2bf84"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "galleryskin-2bf84"
+  }
+}

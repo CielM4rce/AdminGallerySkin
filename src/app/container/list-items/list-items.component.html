@@ -1,9 +1,27 @@
 
-<div style="overflow:scroll; height:100vh;">
+<!--<div style="overflow:scroll; height:100vh;">
     <div class="gallery">
         <div class="gallery-img" *ngFor="let data of _services.ListImg | paginate: { itemsPerPage: 10, currentPage: p }">
             <img [src]="data.url" [alt]="data.cod">
         </div>
     </div>
 </div>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+<!--<div style="overflow:scroll; height:100vh;">
+    <div class="gallery">
+        <div class="gallery-img" *ngFor="let data of place | paginate: { itemsPerPage: 10, currentPage: p }">
+            <img [src]="data.listUrl[0]" [alt]="data.id">
+        </div>
+    </div>
+</div>
 <pagination-controls (pageChange)="p = $event"></pagination-controls>
+{{buscarData}}
+<button (click)="buscar()">buscar</button>-->
+<div>
+    <div class="gallery">
+        <div class="gallery-img" *ngFor="let data of _services.ListPlaceFilter ">
+            <img [lazyLoad]="data.listUrl[0]" [alt]="data.id"[defaultImage]="defaultImage" >
+        </div>
+    </div>
+</div>
