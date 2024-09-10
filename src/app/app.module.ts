@@ -18,6 +18,12 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 import { LAZYLOAD_IMAGE_HOOKS, LazyLoadImageModule, ScrollHooks } from 'ng-lazyload-image';
 import { Container2Component } from './container2/container2.component';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { BtnWhatsappComponent } from './container2/btn-whatsapp/btn-whatsapp.component';
+
+import {MatIconModule} from '@angular/material/icon';
+import { FooterComponent } from './container2/footer/footer.component';
+
 
 
 @NgModule({
@@ -26,15 +32,19 @@ import { Container2Component } from './container2/container2.component';
     FormularioComponent,
     ContainerComponent,
     ListItemsComponent,
-    Container2Component
+    Container2Component,
+    BtnWhatsappComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
+    MatIconModule,
     AppRoutingModule,
     HttpClientModule,
     MatChipsModule,
+    NgxImageZoomModule,
     NgxPaginationModule,
     LazyLoadImageModule,
     provideFirebaseApp(() => initializeApp({"projectId":"galleryskin-2bf84","appId":"1:700593843371:web:8eaabf8d8f3e6d52b41bee","storageBucket":"galleryskin-2bf84.appspot.com","apiKey":"AIzaSyDRRiQhAVrOAexTYF7FS9ShCLyZsmJCnRc","authDomain":"galleryskin-2bf84.firebaseapp.com","messagingSenderId":"700593843371","measurementId":"G-XXQEKSTRJG"})),

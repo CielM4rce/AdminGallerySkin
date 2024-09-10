@@ -11,6 +11,7 @@ export class PeticionesService {
 
   public ListPlace:Place[]=[] ;
   public ListPlaceFilter:Place[]=[] ;
+  public ModalSelect: Place | undefined;
   //public observale:Observable<Place[]>
 
   public ultCod?:number

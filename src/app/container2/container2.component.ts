@@ -16,7 +16,7 @@ export class Container2Component {
   buscando:string="data"
   busqueda = new FormControl("",Validators.minLength(1));
   clase = new FormControl()
-  public typeList:any=["Anime","Peliculas","VideoJuegos","Marcas","Musica","Autos y Motos","Paisajes","Animales","Caricaturas","Otros"];
+  public typeList:any=["Anime","Peliculas","VideoJuegos","Marcas","Musica","Autos y Motos","Paisajes","Animales","Caricaturas","Otros","PS5"];
   
   
  

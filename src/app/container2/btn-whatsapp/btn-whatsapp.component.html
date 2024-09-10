@@ -1,0 +1,22 @@
+
+
+<div class="whatsapp" *ngIf="mensaje">
+    <div class="row">
+        <div class="col-md-12 bg-success rounded p-2">
+            <img class="img-logo" src="assets\logoSkinGallery.jpg" alt="logo skin gallery" >
+            Skin Gallery
+        </div>
+        <div class="col-md-12 bg-light rounded">
+            <p>Pedido<br/>
+            {{pedido?.descripcion}}<br/>
+            Cod Skin: {{pedido?.cod}}<br/>
+            Tamaño: {{pedido?.size}}<br/>
+            Piezas: {{pedido?.parts}}<br/>
+
+            <p class="text-end">
+                <a [href]="url" target="_blank"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="send" (click)="abrirMensaje()" ></mat-icon></a>
+            </p>
+        </div>
+    </div>
+</div>
+<img class="img-whatsapp" src="assets/whatsapp.svg" alt="logo whatsapp" (click)="mensaje=!mensaje; mensajeChange.emit()">

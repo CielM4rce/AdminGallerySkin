@@ -1,27 +1,66 @@
 
-<!--<div style="overflow:scroll; height:100vh;">
-    <div class="gallery">
-        <div class="gallery-img" *ngFor="let data of _services.ListImg | paginate: { itemsPerPage: 10, currentPage: p }">
-            <img [src]="data.url" [alt]="data.cod">
-        </div>
-    </div>
-</div>
-<pagination-controls (pageChange)="p = $event"></pagination-controls>-->
-
-<!--<div style="overflow:scroll; height:100vh;">
-    <div class="gallery">
-        <div class="gallery-img" *ngFor="let data of place | paginate: { itemsPerPage: 10, currentPage: p }">
-            <img [src]="data.listUrl[0]" [alt]="data.id">
-        </div>
-    </div>
-</div>
-<pagination-controls (pageChange)="p = $event"></pagination-controls>
-{{buscarData}}
-<button (click)="buscar()">buscar</button>-->
 <div>
     <div class="gallery">
-        <div class="gallery-img" *ngFor="let data of _services.ListPlaceFilter ">
-            <img [lazyLoad]="data.listUrl[0]" [alt]="data.id"[defaultImage]="defaultImage" >
+        <div class="gallery-img" *ngFor="let data of _services.ListPlaceFilter " data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <img [lazyLoad]="data.listUrl[0]" [alt]="data.id" [defaultImage]="defaultImage" (click)="select(data)" >
         </div>
     </div>
 </div>
+
+  <!-- Modal -->
+  <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{modalSelect.descripcion}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                 
+                  <!--<img [src]="modalSelect.listUrl[0]" alt=""  class="img-fluid">-->
+                  <div id="carouselExample" class="carousel slide">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <lib-ngx-image-zoom class="d-block w-100" alt="..." [thumbImage]=modalSelect.listUrl[0] [fullImage]=modalSelect.listUrl[0]  [magnification]=2></lib-ngx-image-zoom>
+                      </div>
+                      <div class="carousel-item">
+                        <lib-ngx-image-zoom class="d-block w-100" alt="..." [thumbImage]=modalSelect.listUrl[1] [fullImage]=modalSelect.listUrl[1]  [magnification]=2></lib-ngx-image-zoom>
+                        
+                      </div>
+                     
+                    </div>
+                    <button class="carousel-control-prev bg-dark" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next bg-dark" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                </div>
+                
+            </div>
+        </div>
+        <form [formGroup]="pedir">
+            <div class="modal-footer">
+              <div class="row">
+                <div class="input-group col-md-4">
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" formControlName="part" >
+                    <option *ngFor="let piezas of parts" [ngValue]="piezas">{{piezas}}</option>
+                  </select>
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" formControlName="size">
+                    <option *ngFor="let opcion of sizes" [ngValue]="opcion" >{{opcion}}</option>
+                  </select>
+                  <button type="button" class="btn btn-success" (click)="pedido()" data-bs-dismiss="modal" aria-label="Close">Pedido</button>
+                </div>
+              </div>
+            </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+
+  <app-btn-whatsapp [pedido]="itemWhatsapp" [mensaje]="stadoWhatsapp" (mensajeChange)="stadoWhatsapp=!stadoWhatsapp" ></app-btn-whatsapp>

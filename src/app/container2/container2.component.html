@@ -5,9 +5,11 @@
       <form class="container-fluid">
         <div class="input-group">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [formControl]="busqueda">
-            </div>
-          </form>
-          <button class="btn btn-outline-success" (click)="_services.buscar(busqueda.value)">Buscar</button>
+            
+            <button class="btn btn-outline-success" (click)="_services.buscar(busqueda.value)">Buscar</button>
+        </div>
+        </form>
+          
         
     </div>
   </nav>
@@ -20,3 +22,6 @@
     <app-list-items buscarData="{{busqueda}}"></app-list-items>
 
 </div>
+
+<app-footer></app-footer>
+
