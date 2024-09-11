@@ -15,6 +15,7 @@
   </nav>
 <div class="container fondo">
     <mat-chip-listbox #listchips aria-label="Fish selection" [formControl]="clase" >
+        
         <mat-chip-option #chip *ngFor="let i of typeList" value="{{i}}" (selectionChange)="_services.filtrar(i)" >
             {{i}}
         </mat-chip-option>
