@@ -1,9 +1,4 @@
 .footer{
-    
-    bottom: 1px;
-    border-radius: 5px;
     font-size: 20px;
-    color:rgb(243, 229, 211);
-    background-color: rgb(15, 15, 15);
-    font-family: cursive;
+    background-color: gray;
 }
