@@ -8,10 +8,10 @@
         </div>
         <div class="col-md-12 bg-light rounded">
             <p>Pedido<br/>
-            {{pedido?.descripcion}}<br/>
-            Cod Skin: {{pedido?.cod}}<br/>
+            {{pedido?.place?.descripcion}}<br/>
+            Cod Skin: {{pedido?.place?.cod}}<br/>
             Tamaño: {{pedido?.size}}<br/>
-            Piezas: {{pedido?.parts}}<br/>
+            Piezas: {{pedido?.Piezas}}<br/>
 
             <p class="text-end">
                 <a [href]="url" target="_blank"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="send" (click)="abrirMensaje()" ></mat-icon></a>

@@ -1,25 +1,36 @@
-<nav class="navbar bg-primary navbar-expand-lg bg-body-tertiary sticky-top" data-bs-theme="dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="">Skin Gallery</a>
+<div class="back"><nav class="navbar  navbar-expand-lg sticky-top back" >
+    <div class="container-fluid ">
+      <a class="navbar-brand logo" href="">Skin Gallery</a>
      
-      <form class="container-fluid">
+     
         <div class="input-group">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [formControl]="busqueda">
             
-            <button class="btn btn-outline-success" (click)="_services.buscar(busqueda.value)">Buscar</button>
+            <button class="btn btn-outline-success" [routerLink]="['Categoria/Busqueda/'+busqueda.value]">Buscar</button>
         </div>
-        </form>
+        
           
         
     </div>
   </nav>
+</div>
 <div class="container fondo">
-    <mat-chip-listbox #listchips aria-label="Fish selection" [formControl]="clase" >
-        <mat-chip-option #chip *ngFor="let i of typeList" value="{{i}}" (selectionChange)="_services.filtrar(i)" >
-            {{i}}
-        </mat-chip-option>
+    
+    
+    <mat-chip-listbox #listchips aria-label="Fish selection" >
+        @for (i of typeList; track $index) {
+            <mat-chip-option #chip  value="{{i}}"  [routerLink]="['Categoria/Lista-Skin/'+i]">
+                {{i}}
+            </mat-chip-option>
+        }@empty {
+
+        }
+        
     </mat-chip-listbox>
-    <app-list-items buscarData="{{busqueda}}"></app-list-items>
+    <router-outlet>
+        
+    </router-outlet>
+   <!--<app-list-items buscarData="{{busqueda}}"></app-list-items>-->
 
 </div>
 

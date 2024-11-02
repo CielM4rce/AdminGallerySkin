@@ -1,4 +1,8 @@
-<button (click)="addItem()" *ngIf="!openForm">Nuevo</button>
+@if(!openForm){
+    <button (click)="addItem()">Nuevo</button>
+}
+
+
 <button (click)="closeItem()" type="button" class="btn-close" *ngIf="openForm"></button>
 <div *ngIf="openForm">
     <form [formGroup]="formImg" (submit)="onSubmit()" >
@@ -42,10 +46,14 @@
             <label for="formGroupExampleInput">descripcion:</label>
         </div>
         
+        
         <mat-chip-listbox #listchips aria-label="Fish selection" multiple formControlName="clase">
-            <mat-chip-option #chip *ngFor="let i of typeList" value="{{i}}">
-                {{i}}
-            </mat-chip-option>
+            @for (i of typeList; track $index) {
+                <mat-chip-option #chip  value="{{i}}">
+                    {{i}}
+                </mat-chip-option>
+            }
+            
         </mat-chip-listbox>
     
         <div class="form-floating mx-auto d-block m-2">

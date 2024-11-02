@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FieldPath, Firestore, OrderByDirection, addDoc, collection, collectionData, limit, orderBy, query } from '@angular/fire/firestore';
+import { FieldPath, Firestore, OrderByDirection, addDoc, collection, collectionData, doc, docData, limit, orderBy, query, where } from '@angular/fire/firestore';
 import { Place } from './estructura';
 
 @Injectable({
@@ -9,29 +9,25 @@ import { Place } from './estructura';
 })
 export class PeticionesService {
 
-  public ListPlace:Place[]=[] ;
+  public ListPlace!:Place[] ;
   public ListPlaceFilter:Place[]=[] ;
   public ModalSelect: Place | undefined;
   //public observale:Observable<Place[]>
+  
 
   public ultCod?:number
 
-  constructor(private http:HttpClient, private firestore:Firestore) {}
-
-  
-  /*  public getTypeImages(){
-   return this.http.get('https://marketpandi.000webhostapp.com/data/salidaTypeImg.php');
-  }
-
-  public getAllImages(){
-    return this.http.get('https://marketpandi.000webhostapp.com/data/salidaGallery.php');
-  }
-
-  public getAllImage(){
-    this.http.get('https://marketpandi.000webhostapp.com/data/salidaGallery.php').subscribe(data=>{
-      this.ListImg=data;
+  constructor(private firestore:Firestore) {
+    this.getPlaces().subscribe(places =>{
+      //console.log(places);
+    
+      this.ListPlace=places
+      //this.ListPlaceFilter=places
+      this.ultCod= (this.ListPlace[0].cod)+1
+      console.log(this.ListPlace)
     })
-  }*/
+  }
+
 
   addPlace(place: Place){
     const placeRef = collection(this.firestore,'place');
@@ -49,9 +45,10 @@ export class PeticionesService {
   }
    getPlaces1(){
     //const placeRef = collection(this.firestore, 'place')
-    const placeRef =  collection(this.firestore, 'place')
-    const placexD =  query(placeRef, orderBy("ingreso","desc"));
-    const data = collectionData(placexD,{ idField:"ingreso"}) as Observable<Place[]>
+    const placeRef =  collection(this.firestore, 'place',)
+    const shared  =   doc(placeRef,"HpJBSCDryHiNSnMUPmoQ");
+    //const placexD =  query(placeRef, orderBy("ingreso","desc"));
+    const data = collectionData(placeRef,{ idField:"Id"}) as Observable<Place[]>
     
    
     //const res= list.subscribe(places=>this.listPlaces=places) 
@@ -59,6 +56,7 @@ export class PeticionesService {
   }
   
   buscar(titulo:any){
+    console.log(titulo)
     //console.log( this.place.find(x => x.descripcion == "dragon ball"));
     //let busqueda = this.place.filter(persona => persona.titulo == 'Hello')
     let busqueda2 = this.ListPlace.filter(persona => isEqual(persona.descripcion,titulo))
@@ -67,12 +65,23 @@ export class PeticionesService {
     this.ListPlaceFilter=busqueda2;
   }
 
-  filtrar(clase:string){
-    console.log(clase);
+   filtrar(clase:string){
+    //console.log(clase);
     let filtrar = this.ListPlace.filter(x => x.clase.includes(clase));
     this.ListPlaceFilter=filtrar;
     console.log(filtrar)
-    
+  }
+
+  itemSelect(cod:any){
+    return this.ListPlace.find((data)=>data.cod==cod)
+  }
+
+  getItemSelect(cod:string):Observable<Place>{
+    //const placeRef = collection(this.firestore, 'place')
+    const placeRef =  collection(this.firestore, 'place',)
+    const shared  =   doc(placeRef,cod);
+    return docData(shared,{idField:"ingreso"}) as Observable<Place>
+    // return collectionData(shared,{ idField:"Id"}) as Observable<Place[]>
   }
 }
 //.collection("place")

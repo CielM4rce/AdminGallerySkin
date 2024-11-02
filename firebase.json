@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "target": "galeriaImage",
+      "target": "galeria-image",
       "source": ".",
       "frameworksBackend": {}
     }

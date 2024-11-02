@@ -1,7 +1,12 @@
-import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, OnInit, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, Input, inject } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { switchMap } from 'rxjs';
+import { BtnWhatsappComponent } from 'src/app/container2/btn-whatsapp/btn-whatsapp.component';
 import { Place } from 'src/app/estructura';
 import { PeticionesService } from 'src/app/peticiones.service';
 
@@ -11,16 +16,22 @@ import { PeticionesService } from 'src/app/peticiones.service';
 @Component({
   selector: 'app-list-items',
   templateUrl: './list-items.component.html',
-  styleUrls: ['./list-items.component.css']
+  styleUrls: ['./list-items.component.css'],
+  standalone: true,
+  imports: [CommonModule,LazyLoadImageModule,NgxImageZoomModule,ReactiveFormsModule,BtnWhatsappComponent,RouterModule],
 })
 export class ListItemsComponent implements OnInit{
 
+  private route = inject(ActivatedRoute);
 
+  
+ 
 
-  @Input() buscarData?:string
+  //@Input({required:false}) buscarData!:string
   defaultImage= "assets/lg.gif"
 
 
+  
   place ?:Place[];
 
   modalSelect:Place={
@@ -49,39 +60,50 @@ export class ListItemsComponent implements OnInit{
   });
   //parts=new FormControl();
   stadoWhatsapp: boolean = false;
-
-  /*itemWhatsapp= new FormGroup({
-    cod: new FormControl(this.modalSelect.cod),
-    descripcion: new FormControl(this.modalSelect.descripcion)
-  })*
-
-  /*itemWhatsapp= new FormGroup({
-    cod: new FormControl(this.modalSelect.cod),
-    descripcion: new FormControl(this.modalSelect.descripcion)
-  })*/
-
   
 
   constructor(public _services:PeticionesService){
-     
+    
   }
   ngOnInit(): void {
-    this._services.getPlaces().subscribe(places =>{
+    this._services.getPlaces().subscribe(p=>{
+      //this._services.filtrar(this.busqueda)
+      console.log("eperando")
+      this.route.params.subscribe(params=>{
+        console.log(params)
+       // this._services.ListPlaceFilter=p
+      if(params['Busqueda']=='Busqueda'){
+        this._services.buscar(params['clase'])
+      }else if(params['clase']=='Todos'){
+        this._services.ListPlaceFilter=p
+      }else{
+          this._services.filtrar(params['clase'])
+      }
+        //  this._services.filtrar(params['clase'])
+       // }
+        
+      })
+    }
+
+    )
+   // this._services.getPlaces().subscribe(places =>{
       //console.log(places);
-      this.place = places
-      this._services.ListPlace=places
-      this._services.ListPlaceFilter=places
-      this._services.ultCod= (this.place[0].cod)+1
-      console.log(this._services.ListPlace)
-    })
-   
+     // this.place = places
+     // this._services.ListPlace=places
+     // this._services.ListPlaceFilter=places
+    //  this._services.ultCod= (this._services.ListPlace[0].cod)+1
+    //  console.log(this._services.ListPlace)
+   // })
+  // console.log(this.busqueda) 
   }
 
+
+
   
-  async llamar(){
-    await this._services.getPlaces1()
-     this.place= await this._services.ListPlace;
-  }
+ // async llamar(){
+  //  await this._services.getPlaces1()
+   //  this.place= await this._services.ListPlace;
+  //}
   buscar(){
     let busqueda2 = this._services.ListPlace.filter(persona => isEqual(persona.descripcion,"dragon"));
     console.log(busqueda2);

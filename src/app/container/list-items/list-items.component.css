@@ -14,6 +14,9 @@
    column-gap: 30px;
 
 }
+.gallery-img{
+    margin: 5px;
+}
 
 .gallery-img img{
     width: 100%;
@@ -23,10 +26,19 @@
     box-shadow: 0 1px 5px 0 rgba(0,0, 0, .21);
 
 }
+.gallery-img :hover{
+    margin: 2px;
+}
 
 @media(max-width:430px){
     .gallery{
         grid-template-columns: repeat(2, 1fr);
         column-gap: 10px;
     }
+}
+
+.carga{
+    display: block;
+    width: 500px;
+    height: 500px;
 }

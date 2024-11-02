@@ -11,3 +11,10 @@ export interface Place {
     ingreso:Timestamp;
    
 }
+
+export interface placePedido{
+    place:Place;
+    Piezas:Array<string>;
+    size:string;
+    Precio:number;
+}

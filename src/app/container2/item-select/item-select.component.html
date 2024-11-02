@@ -1,0 +1,76 @@
+<h6 class="text">Lista Skin >> {{seleccion()?.cod}} >>  {{seleccion()?.descripcion}} </h6>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="mockup-marca"></div>
+                    <div class="mockup-marca"></div>
+                    <div class="mockup-marca"></div>
+                    <div class="mockup-marca"></div>
+                </div>
+                <div class="col-md-10">
+                    <div class="mockup-img">
+                        <div class="center-img">
+                            <img src="{{seleccion()!.listUrl[1]}}" alt="" [class]="viewMockup">
+                            <img [src]="viewPng" alt="" class="img-mockup">
+                            
+                        </div>
+                       
+                        
+                    </div>
+                </div>
+            </div>    
+        </div>
+        <div class="col-md-4">
+
+            <h5>{{seleccion()?.titulo}}</h5>
+            @if (dataPedido.value) {
+                <h1>s/.{{dataPedido!.value.length*19}}</h1>
+            }@else{
+                <h1>s/.0</h1>
+            }
+            <hr>
+            <span>{{dataPedido.value}}</span>
+            <div class="row">
+                <mat-chip-listbox  aria-label="Fish selection" multiple [formControl]="dataPedido">
+                    @for (item of partes; track $index) {
+                        <mat-basic-chip-option #op [class]="{'mockup-marca':false,'border-info':op.selected,'shadow':op.selected}" class="rounded border m-2" (selectionChange)="viewPart(item)" value="{{item.part}}"><img width="50px" src="{{item.svg}}" /></mat-basic-chip-option>
+                        
+                    }  
+                </mat-chip-listbox>
+            </div>
+            <hr>
+            <div class="row">
+                <span>Tamaño</span>
+                <mat-chip-listbox  aria-label="Fish selection" [formControl]="size" >
+                    <mat-chip-option>17"</mat-chip-option>
+                    <mat-chip-option>15.6"</mat-chip-option>
+                    <mat-chip-option>14"</mat-chip-option>
+                    <mat-chip-option>13.3"</mat-chip-option>
+                </mat-chip-listbox>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="shadow p-2 mb-5 bg-warning rounded">
+                <h3>Pedido:</h3>
+                <hr>
+                <p><span>Codigo Skin:</span>{{seleccion()?.cod}}</p>
+                <span>Piezas:</span>
+                <mat-chip-set>
+                    @for (item of dataPedido.value; track $index) {
+                        <mat-chip>{{item}}</mat-chip>
+                    }
+                </mat-chip-set>
+                <span>Tamaño:</span>
+                <mat-chip>{{size.value}}</mat-chip>
+                <button class="btn btn-success form-control" (click)="btnPedido()">Pedido Whatsapp</button>
+            </div>    
+        </div>
+
+    </div>
+
+</div>
+<hr>
+
+<app-btn-whatsapp [pedido]="pedido" [mensaje]="stadoWhatsapp" (mensajeChange)="this.stadoWhatsapp=!this.stadoWhatsapp"></app-btn-whatsapp>
