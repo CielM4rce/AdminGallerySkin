@@ -3,6 +3,7 @@ import { ContainerComponent } from './container/container.component';
 import { Container2Component } from './container2/container2.component';
 import { ItemSelectComponent } from './container2/item-select/item-select.component';
 import { ListItemsComponent } from './container/list-items/list-items.component';
+import { ItemSelectPsComponent } from './container2/item-select-ps/item-select-ps.component';
 
 export const routes: Routes = [
     
@@ -13,6 +14,11 @@ export const routes: Routes = [
                 path:'Categoria/:Busqueda/:clase',
                 title:'Lista Completa',
                 component:ListItemsComponent
+            },
+            {
+                path:'Categoria/:Busqueda/PlayStation/:cod',
+                title:'Item Selecionado play',
+                component:ItemSelectPsComponent
             },
             {
                 path:'Categoria/:Busqueda/:clase/:cod',

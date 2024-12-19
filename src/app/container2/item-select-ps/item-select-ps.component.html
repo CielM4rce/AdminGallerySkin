@@ -1,0 +1,52 @@
+<h6 class="text">Lista Skin >>{{seleccion()?.bloque}} >>{{seleccion()?.titulo}} </h6>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-2">
+                    @for (item of seleccion()?.listUrl; track $index ) {
+                        <div class="mockup-marca" >
+                            <img [src]="item" alt="" (click)="changeImg($index)">
+                        </div>
+                    }      
+                </div>
+                <div class="col-md-10">
+                    <div class="center-img">
+                       @if (seleccion()) {
+                        <img #img [src]="seleccion()!.listUrl[imgMockup]" alt="" class="image-central">
+                       }@else {
+                        <img src="assets/lg.gif" alt="" class="image-central">
+                       }
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h5>{{seleccion()?.descripcion}}</h5>
+            <h1>S/. 70</h1>
+            <hr>
+            <span>Medidas:</span>
+            <mat-chip-listbox [formControl]="size">
+                <mat-chip-option>PS5</mat-chip-option>
+                <mat-chip-option>PS5 Slim</mat-chip-option>
+            </mat-chip-listbox>
+            
+        </div>
+        <div class="col-md-3">
+            <div class="bg-warning rounded p-2">
+                <h2>Pedido:</h2>
+                <span>Codigo Skin: {{seleccion()?.cod}}</span><br>
+                <span>Medidas: {{size.value}}</span>
+                <button class="btn btn-success form-control" (click)="btnPedido()">Pedido Whatsapp</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<app-btn-whatsapp [pedido]="pedido" [mensaje]="stadoWhatsapp" (mensajeChange)="this.stadoWhatsapp=!this.stadoWhatsapp"></app-btn-whatsapp>
+

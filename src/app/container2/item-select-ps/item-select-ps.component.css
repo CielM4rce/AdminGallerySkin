@@ -1,0 +1,33 @@
+.mockup-marca{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    margin: 5px;
+    border-radius: 2px;
+}
+.mockup-marca img{
+    width: 40px;
+    height: auto;
+}
+
+.center-img{
+    width: 100%;
+    height: auto;
+    background-color: black;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    .image-central{
+        position: relative;
+        object-fit: cover;
+        border-radius: 5px;
+        width: 100%;
+        height: auto;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+    }
+}

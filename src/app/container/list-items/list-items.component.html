@@ -2,12 +2,12 @@
 <div>
     <div class="gallery">
       @for (data of _services.ListPlaceFilter; track $index) {
-        <div class="gallery-img"  [routerLink]="['/Catalogo/Categoria/Lista-Skin/'+data.clase+'/'+data.ingreso]">
+        <div class="gallery-img"  [routerLink]="link(data)">
            
-          <img [lazyLoad]="data.listUrl[0]" [alt]="data.id" [defaultImage]="defaultImage" (click)="select(data)" >
+          <img [lazyLoad]="data.listUrl[0]" [alt]="data.id" [defaultImage]="defaultImage" >
         </div>
       }@empty {
-        <div class="gallery-img">....Cargando Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, impedit doloremque? Asperiores sit, nulla quo, cum eos natus molestias tempore suscipit vero expedita nobis iste? Molestiae ea quibusdam recusandae laudantium!</div>
+        <div class="gallery-img"><img  [src]="defaultImage" ></div>
       }
         
     </div>

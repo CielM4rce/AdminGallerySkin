@@ -24,10 +24,12 @@ export class FormularioComponent implements OnInit {
   url2 : FormControl
 
   public typeList:any=["Anime","Peliculas","VideoJuegos","Marcas","Musica","Autos y Motos","Paisajes","Animales","Caricaturas","Otros"];
+  public bloque:Array<string>=["SkinLaptop","SkinPlayStation","FundaLaptop"]
   constructor(public _services:PeticionesService){
     
     this.formImg = new FormGroup({
       titulo  : new FormControl(""),
+      bloque  :new FormControl("",Validators.required),
       cod     : new FormControl(this._services.ultCod),
       listUrl : new FormArray([(this.url1= new FormControl("",Validators.required)),(this.url2 = new FormControl("",Validators.required))]),
       clase   : new FormControl(),

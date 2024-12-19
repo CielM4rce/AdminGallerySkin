@@ -7,9 +7,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(),provideRouter(routes), provideAnimations(),
+  providers: [
+    provideAnimations(),
+    provideToastr({timeOut:3000,preventDuplicates:true}),
+    provideRouter(routes), provideClientHydration(),provideRouter(routes), provideAnimations(),
     importProvidersFrom(
       ReactiveFormsModule,
     ),

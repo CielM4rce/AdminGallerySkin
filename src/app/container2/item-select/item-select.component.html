@@ -1,4 +1,6 @@
-<h6 class="text">Lista Skin >> {{seleccion()?.cod}} >>  {{seleccion()?.descripcion}} </h6>
+<h6 class="text">Lista Skin >> {{seleccion()?.cod}} >>  {{seleccion()?.titulo}} </h6>
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-5">
@@ -6,37 +8,30 @@
                 <div class="col-md-2">
                     <div class="mockup-marca"></div>
                     <div class="mockup-marca"></div>
-                    <div class="mockup-marca"></div>
-                    <div class="mockup-marca"></div>
                 </div>
                 <div class="col-md-10">
                     <div class="mockup-img">
                         <div class="center-img">
                             <img src="{{seleccion()!.listUrl[1]}}" alt="" [class]="viewMockup">
-                            <img [src]="viewPng" alt="" class="img-mockup">
-                            
+                            <img [src]="viewPng" alt="" class="img-mockup">  
                         </div>
-                       
-                        
                     </div>
                 </div>
             </div>    
         </div>
         <div class="col-md-4">
-
-            <h5>{{seleccion()?.titulo}}</h5>
-            @if (dataPedido.value) {
-                <h1>s/.{{dataPedido!.value.length*19}}</h1>
+            <h5>{{seleccion()?.descripcion}}</h5>
+            @if (partsPedido.value) {
+                <h1>s/.{{partsPedido!.value.length*19}}</h1>
             }@else{
                 <h1>s/.0</h1>
             }
             <hr>
-            <span>{{dataPedido.value}}</span>
+            <span>{{partsPedido.value}}</span>
             <div class="row">
-                <mat-chip-listbox  aria-label="Fish selection" multiple [formControl]="dataPedido">
+                <mat-chip-listbox  aria-label="Fish selection" multiple [formControl]="partsPedido">
                     @for (item of partes; track $index) {
-                        <mat-basic-chip-option #op [class]="{'mockup-marca':false,'border-info':op.selected,'shadow':op.selected}" class="rounded border m-2" (selectionChange)="viewPart(item)" value="{{item.part}}"><img width="50px" src="{{item.svg}}" /></mat-basic-chip-option>
-                        
+                        <mat-basic-chip-option #op [class]="{'mockup-marca':false,'border-info':op.selected,'shadow':op.selected}" class="rounded border m-2" (selectionChange)="viewPart(item)" value="{{item.part}}"><img width="50px" src="{{item.svg}}" /></mat-basic-chip-option>     
                     }  
                 </mat-chip-listbox>
             </div>
@@ -58,7 +53,7 @@
                 <p><span>Codigo Skin:</span>{{seleccion()?.cod}}</p>
                 <span>Piezas:</span>
                 <mat-chip-set>
-                    @for (item of dataPedido.value; track $index) {
+                    @for (item of partsPedido.value; track $index) {
                         <mat-chip>{{item}}</mat-chip>
                     }
                 </mat-chip-set>

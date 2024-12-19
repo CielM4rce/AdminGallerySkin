@@ -9,6 +9,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BtnWhatsappComponent } from "../btn-whatsapp/btn-whatsapp.component";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -22,6 +23,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ItemSelectComponent {
 
   private _snackBar = inject(MatSnackBar);
+  private toast = inject(ToastrService);
 
   private route     = inject(ActivatedRoute);
   private services  = inject(PeticionesService);
@@ -49,7 +51,7 @@ export class ItemSelectComponent {
   viewMockup:string="center-img";
 
   pedido?:placePedido
-  dataPedido = new FormControl<string[]>([],Validators.required)
+  partsPedido = new FormControl<string[]>([],Validators.required)
   size  = new FormControl<string>("",Validators.required)
   stadoWhatsapp: boolean = false;
   
@@ -64,19 +66,19 @@ export class ItemSelectComponent {
     }
   
   btnPedido(){
-   if(this.dataPedido.valid && this.size.valid){
+   if(this.partsPedido.valid && this.size.valid){
     console.log("valido")
     this.pedido={
       place:this.seleccion()!,
-      Piezas:this.dataPedido.value!,
+      Piezas:this.partsPedido.value!,
       size:this.size.value!,
-      Precio:this.dataPedido.value!.length*20
+      Precio:this.partsPedido.value!.length*20
       
     }
     this.stadoWhatsapp=true;
       return
     }else{
-      this.openSnackBar();
+      this.toast.error("Completa las Opciones","Error Pedido")
     }
   }
 
